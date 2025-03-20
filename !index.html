@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirigiendo a WhatsApp...</title>
+    <script>
+        const numbers = [
+            "525517976093",
+            "5493764117959",
+            "573223268648"
+        ];
+
+        function getRotatedIndex() {
+            const now = new Date();
+            const hour = now.getHours();
+            return hour < 8 ? 0 : hour < 16 ? 1 : 2;
+        }
+
+        const selectedNumber = numbers[getRotatedIndex()];
+        const whatsappLink = `https://wa.me/${selectedNumber}`;
+
+        // Guardar clic en Google Sheets
+        fetch("https://script.google.com/macros/s/AKfycbyU97huLyxoTUekG5fXKFT4GJTTTTz7TnW54XcoaoAaqCIYQsXjvJrMDSiculuXvtXZIA/exec", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ number: selectedNumber })
+        });
+
+        window.location.href = whatsappLink;
+    </script>
+</head>
+<body>
+    <h1>Redirigiendo a WhatsApp...</h1>
+</body>
+</html>
